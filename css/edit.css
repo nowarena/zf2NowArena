@@ -1,0 +1,36 @@
+label{clear:both;}
+label span{width:150px;float:left;}
+label input{width:300px;float:left;}
+
+input[type='radio']{
+    width:30px;
+    margin-left:20px;
+}
+input[type='checkbox']{
+    width:30px;
+    margin-left:20px;
+}
+label{
+    width:100%;
+}
+
+fieldset{
+	float:left;
+	border:0px solid black;
+}
+legend{
+    font-size:16px;
+    border-bottom:0px;
+}
+
+
+
+/* sort category styles */
+#sortable, #sortableTop, #sortableBottom { list-style-type: none;margin-left:-35px;}
+#sortable li span, #sortableTop li span, #sortableBottom li span { position: absolute; margin-left: -1.3em; }
+#sortable li, #sortableTop li , #sortableBottom li {margin:2px;padding:4px;width:50%;height:30px;}
+.catBox{
+	float:left;
+	padding:4px;
+	width:200px;
+}

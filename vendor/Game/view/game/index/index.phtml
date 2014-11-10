@@ -1,0 +1,78 @@
+<?php
+
+foreach($playerArr as $key => $playerModel) {
+    
+    $handEnt = $playerModel->getHandEntity();
+    $cardEntityArr = $handEnt->getCardEntityArr();
+
+    echo "<div class='playerContainer'>";
+    echo "<div class='headerText'>";
+    echo ($key + 1); 
+    echo " : ";
+    echo $handEnt->getHandName() . " ";
+    if ($handEnt->getFourOf()) {
+        echo $deckModel->getCardName($handEnt->getFourOf()) . "s";
+    } elseif ($handEnt->getThreeOf()) {
+        echo $deckModel->getCardName($handEnt->getThreeOf()) . "s";
+    } elseif ($handEnt->getTwoOf()) {
+        echo $deckModel->getCardName($handEnt->getTwoOf()) . "s";
+    } elseif ($handEnt->getHighTwoPairOf()) {
+        echo $deckModel->getCardName($handEnt->getHighTwoPairOf()) . "s and " . $deckModel->getCardName($handEnt->getLowTwoPairOf()) . "s"; 
+    } elseif ($handEnt->getFullHouseThreeOfAKindOf()) {
+        echo $deckModel->getCardName($handEnt->getFullHouseThreeOfAKindOf()) . "s full of " . $deckModel->getCardName($handEnt->getFullHouseTwoOfAKindOf()) . "s";
+    }
+    if ($handEnt->getIsWinningHand()) {
+        echo " | <span class='winnerText'>Winner!</span>";
+    }
+    //echo "Rank: " . $handEnt->getPokerHandRank() . "<br>";
+    //echo "Is Winning Hand: " . (($handEnt->getIsWinningHand()) ? 'yes' : 'no');
+    if (count($playerModel->getTiedWith()) > 0) {
+        echo " | Tied with postion(s): ";
+        $str = '';
+        foreach($playerModel->getTiedWith() as $playerPosition) {
+            $str.= ($playerPosition + 1) . ', ';
+        }
+        echo substr($str, 0, -2);
+    }
+    echo "</div>";//close headerText
+    echo "<div class='cardsContainer'>";
+    $numSet = 0;
+    foreach($cardEntityArr as $position => $cardEnt) {
+        $isTopCard = false;
+        foreach($handEnt->getTopCardsArr() as $cardArr) {
+            if ($cardArr[0] == $cardEnt->getValue() && $cardArr[1] == $cardEnt->getSuit()) {
+                $isTopCard = true;
+                break;
+            }
+        }
+        echo "<div class='cardContainer ";
+        if ($isTopCard) {
+            echo "topCard";    
+        }
+        echo "'>";
+        echo "<div class='faceValue'>" . $cardEnt->getFaceValue() . "</div>";
+        echo "<div class='suit " . strtolower($cardEnt->getSuit()). "'>";
+    	switch($cardEnt->getSuit()){
+    	    case 'Hearts':
+    	       echo '&hearts;';
+    	       break;
+    	    case 'Diamonds':
+    	       echo '&diams;';
+    	       break;
+    	    case 'Clubs':
+    	       echo "&clubs;";
+    	       break;
+    	    case 'Spades':
+    	       echo '&spades;';
+    	       break;
+    	}
+        echo "</div>";//close suit
+        echo "</div>";//close cardContainer
+    }
+    
+    echo "</div>";//close cardsContainer
+    echo "</div>";//close playerContainer
+    echo "<div style='clear:both;'></div>";
+    echo "<br>"; 
+    
+}

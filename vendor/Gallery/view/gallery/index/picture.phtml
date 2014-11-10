@@ -1,0 +1,69 @@
+<?php
+/*
+echo "<div class='ad300x100'>";
+$this->Ad('300x100');
+echo "</div>";
+*/
+
+if ($message) {
+    echo "<div class='pictureMessage'>";
+    echo ucfirst($message)."!";
+    echo "</div>";
+}
+
+if ($picture == false) {
+    return;
+}
+
+if (!$isMobile) { 
+    echo "<div class='ad728x90'>";
+    $this->AdGlobal('728x90');
+    echo "</div>";
+}
+
+$options = array('query' => array('frompage' => $frompage, 'frommonth' => $frommonth));
+
+if ($isWebmaster) {
+    echo "<div id='disallowPicLink'>"; 
+    echo "<a href='javascript:void(0);' id='disallowPic' data-id='" . $picture->id . "' ";
+    echo " data-frompage='". $frompage . "' ";
+    echo " data-frommonth='". $frommonth . "' ";
+    echo ">Disallow</a>"; 
+    echo "</div>";
+}
+echo "<div class='pictureHeader'>";
+echo "<div class='pictureHeaderNavLinkLeft pictureNavLinkRight'>";
+if (!stristr($message,'top reached')) {
+    echo "<a class='navLink' href='" . $this->url('picture', array('action' => 'picture', 'idposition' => 'prev', 'id' => $picture->id), $options) . "'>&laquo; Prev Pic</a>";
+}
+echo "</div>";
+
+
+echo "<div class='pictureHeaderNavLinkRight pictureNavLinkLeft'>";
+if (!stristr($message, 'end reached')) {
+    echo "<a href='" . $this->url('picture', array('action' => 'picture', 'idposition' => 'next', 'id' => $picture->id), $options) . "'>Next Pic&raquo;</a>";
+}
+echo "</div>";
+
+echo "<div style='clear:both;'></div>";
+echo "</div>";
+
+echo "<div class='pictureBody'>";
+echo "<a href='" . $picture->getLink() . "' target='_blank'>";
+echo "<img src = '". $picture->getMediaUrl() . "' class='pictureSrc'>";
+echo "</a>";
+echo "</div>";
+
+echo "<div class='picture'>";
+//echo $backLink;
+//echo " &nbsp; &nbsp;";
+//echo "<br>";
+echo "<a class='backToMonthLink' href='" . $this->url('gallery', array('action' => 'index', 'date' => date("Y-M", strtotime($picture->date_inserted))));
+echo "'>&#8593;Top of ". date("Y-M", strtotime($picture->date_inserted)) . "</a>";
+echo "</div>"; 
+
+
+if (count($linkArr) > 0) {
+    echo "<br>";
+    $this->displayLinks($linkArr);
+}

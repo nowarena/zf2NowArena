@@ -1,0 +1,263 @@
+.probsCont{
+	width:390px;
+	margin:0px auto;
+}
+.score{
+	font-weight:bold;
+	font-size:16px;
+	float:left;
+	width:50%;
+	margin-top:10px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	padding-top:4px;
+}
+.closeLayer{
+	text-align:right;
+	padding:6px;
+	margin:6px;
+	float:right;
+	background-color:#dddddd;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+.closeLayerLink{
+	font-weight:bold;
+	font-size:16px;
+}
+.feedbackText{
+	text-align:left;
+	padding:8px;
+}
+.feedbackLayer{
+	display:none;
+	z-index:2;
+	position:absolute;
+	top:5%;
+	left:5%;
+	background-color:#ffffff;
+	border:1px solid black;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	width:90%;
+	margin:auto;
+}
+.feedbackLayerText{
+	padding:4px;
+}
+.cardContainer{
+	width:80px;
+	height:100px;
+	border:1px solid black;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	font-weight:bold; 
+	background-color:#F8F8F8;
+	float:left;
+	margin: 2px;
+}
+
+.diamonds, .hearts{
+	color:red;
+}
+.clubs, .spades{
+	color:black;
+}
+.faceValue{
+	margin-top:8px;
+	font-size:20px;
+	text-align:center;
+}
+.topCard{
+	margin-top:-6px;
+	border-color:green;
+}
+.winnerText{
+	color:green;
+}
+.headerText{
+	font-weight:bold;
+	
+}
+.cardsContainer{
+	margin-top:10px;
+}
+
+.playerContainer{
+	padding:8px;	
+	border:1px solid black;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	display:inline-block;
+}
+
+.keypad{
+	position:relative;
+	border:0px solid black;
+	text-align:center;
+	margin:0px auto;
+	padding:2px;
+}
+.keyCont{
+	font-weight:bold;
+	font-size:30px;
+	margin:1px;
+	border:1px solid black;
+	width:75px;
+	height:70px;
+	text-align:center;
+	padding-top:14px;
+	float:left;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+	background-color:#F8F8F8;
+}
+.suit{
+	font-size:40px;
+	text-align:center;
+	padding-top:0px;
+}
+.submitButtonCont{
+	padding-top:10px;
+	width:80px;	
+	float:right;
+}
+#submitButton{
+	text-align:center;
+	margin-bottom:10px;
+}
+.clearButtonCont{
+	padding-top:10px;
+	width:80px;	
+	float:left;
+}
+#textfield{
+	width:80%;
+	font-weight:bold;
+	font-size:20px;
+	float:left;
+}
+#textfieldSuffixLabel{
+	float:left;
+	text-align:left;
+	margin-left:4px;
+	margin-top:6px;
+	font-weight:bold;
+}
+#answerStatusFeedback{
+	float:left;
+	font-size:20px;
+	padding-left:10px;
+	padding-top:2px;
+}
+#textfieldForm{
+	margin:0px auto;
+	width:100%;
+	padding:5px;
+}
+.oddsCont{
+	text-align:center;
+	width:100%;
+	margin-bottom:4px;
+}
+.board{
+	width:90%;
+	margin:0px auto;
+	border:1px solid black;
+}
+#feedback{
+	min-height:68px;
+	width:100%;
+	border:1px solid black;
+	margin:0px auto;
+	font-size:16px;
+}
+#question{
+	min-height:50px;
+	text-align:left;
+	width:100%;
+	border:0px solid black;
+	margin:0px auto;
+	font-size:16px;
+}
+.correct{
+	color:green;
+}
+.incorrect{
+	color:red;
+}
+#sectionTitle{
+	font-weight:bold;
+	margin:0px auto;
+	margin-top:10px;
+	width:100%;
+}
+#calcTypeForm{
+	margin-top:6px;
+}
+#tableOfContents{
+	margin-left:-20px;
+	font-weight:bold;
+	font-size:20px;
+}
+
+.board, #calcTypeForm, #tableOfContents{
+	width: 100%;
+}
+
+.keyCont{
+	width:92px;
+}
+
+@media screen and (max-width:400px)
+{
+	.probsCont{
+		width:380px;
+		padding:0px;
+		margin:4px;
+	}
+	.keyCont{
+		width:92px;
+	}
+}
+
+@media screen and (max-width:360px)
+{
+	.probsCont{
+		width:340px;
+		padding:0px;
+	}
+	.keyCont{
+		width:82px;
+	}
+}
+@media screen and (max-width:320px)
+{
+	.probsCont{
+		width:300px;
+		padding:0px;
+		margin:4px;
+	}
+}
+@media screen and (max-width:300px)
+{
+	.probsCont{
+		width:320px;
+		padding:0px;
+	}
+	.keyCont{
+		width:70px;
+		height:60px;
+	}
+}

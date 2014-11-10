@@ -1,0 +1,25 @@
+<?php
+$this->headTitle(ucfirst($action));
+
+echo $this->flashMessenger()->render();
+$this->Subnav();
+echo "<a href='" . $this->url('blvd', array('action' => 'edit', 'id'=>$blvdArr['id'], 'site' => SITE)) . "'>Edit Blvd</a><br><br>";
+
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('twitter', array('action' => $action, 'screenname' => $screenname, 'site' => SITE)));
+$form->prepare();
+
+echo $this->form()->openTag($form);// . "<br>";
+echo $this->formRow($form->get('twitter_id')) . "<br>";
+echo $this->formRow($form->get('name')) . "<br>";
+echo $this->formRow($form->get('screen_name')) . "<br>";
+echo $this->formRow($form->get('description')) . "<br>";
+echo $this->formRow($form->get('url')) . "<br>";
+echo $this->formRow($form->get('profile_image_url')) . "<br>";
+echo $this->formRow($form->get('foodtruck'));// . "<br>";
+echo $this->formRow($form->get('disable_at_tweets'));// . "<br>";
+echo $this->formRow($form->get('disable_retweets'));// . "<br>";
+
+echo $this->formInput($form->get('submit')) . "<br>";
+echo $this->form()->closeTag($form) . "<br>";

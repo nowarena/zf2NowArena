@@ -1,0 +1,46 @@
+<?php
+
+$this->Subnav($this);
+
+echo $this->flashMessenger()->render();
+
+
+echo "<div style='clear:both;'></div>";
+echo "<p>Drag and drop to change displayed sort order.</p>";
+
+echo "<ul id='sortable'>";
+foreach($linkEnt as $key => $obj) {
+    if ($obj->getDisabled() == 1) {
+        continue;
+    }
+	echo '<li id="link_' . $obj->getId() . '" class="ui-state-default catBox"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>';
+	echo $obj->getLinkname();
+	echo "<div style='float:right;'>";
+	echo "<a href='" . $this->url('links', array('action'=>'deletelink', 'id'=>$obj->getId())) . "' onclick='return confirm(\"Are you sure?\");'>Delete</a>";
+	echo "</div>";
+	echo "</li>";
+}
+
+echo "</ul>";
+
+?>
+
+<script>
+$(function() {
+	$( "#sortable" ).sortable();
+	$( "#sortable" ).disableSelection();
+
+	$('#sortable').sortable({
+		axis: 'y',
+		update: function (event, ui) {
+			var data = $(this).sortable('serialize');
+			$.ajax({
+				data: data,
+				type: 'POST',
+				url: '/links/index/linksort'
+			});
+		}
+	});
+
+});
+</script>

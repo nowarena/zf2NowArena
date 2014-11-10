@@ -1,0 +1,32 @@
+<?php
+
+$this->headTitle("Admin");
+
+echo $this->flashMessenger()->render();
+echo $this->Subnav($this);
+
+echo "<table cellpadding=4 cellspacing=0 border=1>";
+foreach($blvd as $key => $obj) {
+    echo "<tr><td><a name='". $obj->getId() . "'></a>";
+    echo $obj->getName();
+    echo "</td><td>";
+    echo $obj->getCategory();    
+    echo "</td><td>";
+    
+    echo $obj->getSecondaryCategory();    
+    
+    echo "</td><td>";
+    echo "<a href='" . $this->url('blvd', array('action'=>'edit', 'id'=>$obj->getId())) . "'>Edit Info</a>";
+    echo "</td><td>";
+    if ($obj->getTwitterUsername() !='') {
+        echo "<a href='";
+        echo $this->url('twitterblvd', array('action' => 'edituser', 'screenname' => $obj->getTwitterUsername())) . "'>Edit Twitter Info</a>";       
+    } else {
+        echo " &nbsp; ";
+    }
+    echo "</td><td>";
+    echo "<a onclick='return confirm(\"Are you sure?\");' href='";
+    echo $this->url('blvd', array('action' => 'deletefromblvd', 'id' => $obj->getId())) . "'>Delete from Blvd</a>";  
+    echo "</td></tr>";
+}
+echo "</table>";

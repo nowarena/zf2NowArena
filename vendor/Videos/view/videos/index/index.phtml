@@ -1,0 +1,42 @@
+<div class='galleryNavContainer'>
+        <div class='videoNavLinkLeft'></div>
+        <div class='videoNavLinkRight'></div>
+    <div style='clear:both;'></div>
+</div>
+
+<div class="galleryTable">
+
+    <div class='mainVideoAdContainer'>
+            <div class='bigGalleryAdImage'>
+            <?php 
+            if (!$isMobile) { 
+                $this->AdGlobal('300x250');
+            } 
+
+            
+            ?> 
+            </div> 
+    </div>
+
+    <div id='galleryThumbs'></div>
+
+    <div style='clear:both;'></div>
+ 
+</div>
+
+<form>
+<input type='hidden' name='offset' id='offset' value='0'>
+<input type='hidden' name='offsetAdBig' id='offsetAdBig' value='0'>
+</form>
+
+<div style='clear:both;'></div>
+
+<div id='videoPlayerLayer'>
+<div class='closeX'><a href='javascript:void(0);' id='closeXLink'>Close X</a></div>
+<iframe id='videoPlayerIframe' width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+
+</div>
+
+
+<?php
+$this->displayLinks($linkArr);

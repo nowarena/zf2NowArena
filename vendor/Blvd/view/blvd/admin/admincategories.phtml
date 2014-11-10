@@ -1,0 +1,93 @@
+<?php
+
+$this->headTitle("Edit Blvd Categories");
+
+echo $this->flashMessenger()->render();
+$this->Subnav($this);
+
+$this->displayCategories($categoryTopArr, $this);
+
+echo "<h3>Add</h3>";
+$this->mngcategory($form, $action, $id);
+
+echo "<h3>Edit</h3>";
+echo "<p><b>Click on a row and drag and drop it to change sort order.</b></p>";
+
+echo "Category links at top of page<br>";
+if (count($blvdCatTop) == 0) {
+    echo "none<br>";
+}
+echo "<ul id='sortableTop'>";
+foreach($blvdCatTop as $key => $obj) {
+    echo '<li id="cattop_' . $obj->getId() . '" class="ui-state-default catBox"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>';
+    echo $obj->getCategory();
+    echo "<div style='float:right;'>";
+    echo "<a href='" . $this->url('blvd', array('action'=>'editcategory', 'id'=>$obj->getId())) . "'>Edit</a>";
+    echo " &nbsp; ";
+    echo "<a href='" . $this->url('blvd', array('action'=>'deletecategory', 'id'=>$obj->getId())) . "' onclick='return confirm(\"Are you sure?\");'>Delete</a>";
+    echo "</div>";
+    echo "</li>";
+}
+
+echo "</ul>";
+
+echo "<div style='clear:both;'></div><br>";
+
+echo "Category links at bottom of page<br>";
+if (count($blvdCatBottom) == 0) {
+    echo "none<br><br>";
+}
+echo "<ul id='sortableBottom'>";
+foreach($blvdCatBottom as $key => $obj) {
+    echo '<li id="catbottom_' . $obj->getId() . '" class="ui-state-default catBox"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>';
+    echo $obj->getCategory();
+    echo "<div style='float:right;'>";
+    echo "<a href='" . $this->url('blvd', array('action'=>'editcategory', 'id'=>$obj->getId())) . "'>Edit</a>";
+    echo " &nbsp; ";
+    echo "<a href='" . $this->url('blvd', array('action'=>'deletecategory', 'id'=>$obj->getId())) . "' onclick='return confirm(\"Are you sure?\");'>Delete</a>";
+    echo "</div>";
+    echo "</li>";
+}
+
+echo "</ul>";
+
+echo "<div style='clear:both;'></div><br>";
+
+echo "Disabled category links<br>";
+if (count($blvdCatDisabled) == 0) {
+    echo "none<br><br>";
+}
+foreach($blvdCatDisabled as $key => $obj) {
+    echo "<div class='catBox'>" . $obj->getCategory() . "</div>";;
+    echo "<div class='catBox'>";
+    echo "<a href='" . $this->url('blvd', array('action'=>'editcategory', 'id'=>$obj->getId())) . "'>Edit</a>";
+    echo " &nbsp; ";
+    echo "<a href='" . $this->url('blvd', array('action'=>'deletecategory', 'id'=>$obj->getId())) . "' onclick='return confirm(\"Are you sure?\");'>Delete</a>";
+    echo "</div>";
+}
+echo "<div style='clear:both;'></div><br>";
+
+$this->displayCategories($categoryBottomArr, $this);
+
+?>
+
+<script>
+$(function() {
+    $( "#sortableTop, #sortableBottom" ).sortable();
+    $( "#sortableTop, #sortableBottom" ).disableSelection();
+
+    $('#sortableTop, #sortableBottom').sortable({
+        axis: 'y',
+        update: function (event, ui) {
+            var data = $(this).sortable('serialize');
+            // POST to server using $.post or $.ajax
+            $.ajax({
+                data: data,
+                type: 'POST',
+                url: '/admin/categorysort'
+            });
+        }
+    });
+    
+});
+</script>

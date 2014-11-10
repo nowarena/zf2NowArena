@@ -1,0 +1,47 @@
+<div class='galleryNavContainer'>
+    <div class='galleryNav'>
+        <div class='galleryNavLinkLeft'> &nbsp; </div>
+        <div class='galleryNavDate'></div>
+        <div class='galleryNavLinkRight'></div>
+        <div style='clear:both;'></div>
+    </div>
+    <div style='clear:both;'></div>
+</div>
+
+<div class="galleryTable">
+
+    <div class='mainGalleryAdContainer'>
+            <div class='bigGalleryAdImage'>
+            <?php 
+            if (!$isMobile) { 
+                $this->AdGlobal('300x250');
+            }
+            ?> 
+            </div> 
+    </div>
+
+    <div id='galleryThumbs'></div>
+
+    <div style='clear:both;'></div>
+ 
+</div>
+
+<form>
+<input type='hidden' name='offset' id='offset' value='0'>
+<input type='hidden' name='offsetAdBig' id='offsetAdBig' value='0'>
+</form>
+
+<div style='clear:both;'></div>
+<br>
+<div class='monthlyNavCont'>
+<div class='monthlyNavHeader'>Pictures by Month</div>
+<div class='monthlyNavLinkCont'><a href='javascript:void(0);' style='visibility:hidden;' class='monthlyNavLink' id='prevMonthlyNavLink'>&laquo;</a></div>
+<div class='monthlyNavThumbCont'></div>
+<div class='monthlyNavLinkCont' style='float:right;'>
+<a href='javascript:void(0);' class='monthlyNavLink' id='nextMonthlyNavLink'>&raquo;</a>
+</div>
+<div style='clear:both;'></div>
+</div>
+
+<?php
+$this->displayLinks($linkArr);

@@ -1,0 +1,41 @@
+<?php 
+use Utility\Model\Utility;
+
+$this->displayCategories($categoryTopArr, true);
+
+if (!isset($categoryTopArr[$categoryId]) && !isset($categoryBottomArr[$categoryId])) {
+    
+    $val = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath();
+    $val = substr($val, 1);
+    echo "<h1>Invalid category: " . $val . "</h1>";
+    
+} else { 
+
+    $catName = isset($categoryTopArr[$categoryId]['category']) ? $categoryTopArr[$categoryId]['category'] : $categoryBottomArr[$categoryId]['category'];
+    
+    echo "<div class='categoryHeader'>";
+    echo "<span class='sectionTitle'>" . $catName . "</span> - all ";
+    echo "</div>";
+    
+    $rowCount = 1; 
+    foreach($blvdUsersEnt as $key => $ent) {
+            
+        echo "<div class=";
+        if ($rowCount == count($blvdUsersEnt)) {//->count()) {
+            echo 'rowContainerLast';
+        } else {
+            echo 'rowContainer';
+        }
+        echo ">";
+        $this->container($ent);
+    	echo "<div style='clear:both;'></div>";
+    	echo "</div>";
+        $rowCount++;
+    }
+}
+
+echo "<div style='clear:both;'></div><br>";
+$this->displayCategories($categoryBottomArr);
+echo "<div style='clear:both;'></div><br>";
+$this->displayLinks($linkArr);
+echo $this->partial("partial/confirmdiv.phtml");

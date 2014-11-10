@@ -1,0 +1,77 @@
+<?php
+$this->headTitle(ucfirst($action));
+
+echo $this->flashMessenger()->render();
+$this->Subnav($this);
+
+if ($addCatsFirst) {
+    echo "<p>You need to <a href='/admin/admincategories'>enter some categories</a> first.</p>";
+    return;
+}
+
+if ($action == 'edit') {
+    echo "<a href='http://google.com?#q=".urlencode($form->get('name')->getValue()) . "' target=_blank>google " . $form->get('name')->getValue() . "</a><br><br>";
+}
+
+// won't have a blvdId when adding, so can't do this yet
+// todo: make sure 'primary category' has a matching 'category'
+if (isset($this->catform)) {
+    
+    echo "<div style='float:right;border-left:1px solid black;padding-left:8px;width:40%;'>";
+    echo "<a href='javascript:void(0);' class='clearChecked'>Clear Checked</a>";
+    $this->catform->setAttribute('action', $this->url('blvd', array('action' => 'joinCategory', 'id'=>$id)));
+    $this->catform->prepare();
+    echo $this->form()->openTag($catform);// . "<br>";
+    
+    echo $this->formLabel($catform->get('category_id_arr')) . "<br>";
+    echo $this->formElement($catform->get('category_id_arr'));
+    echo $this->formElementErrors($catform->get('category_id_arr'));
+    
+    echo $this->formLabel($catform->get('primary')) . "<br>";
+    echo $this->formElement($catform->get('primary'));
+    echo $this->formElementErrors($catform->get('primary'));
+    
+    echo $this->formElement($catform->get('blvd_id'));
+    echo $this->formElementErrors($catform->get('blvd_id'));
+    echo "<br><br>";
+    echo $this->formInput($catform->get('submit')) . "<br>";
+    echo $this->form()->closeTag($catform) . "<br>";
+    echo "<div style='clear:both;'></div>";
+    echo "</div>";
+    //echo "<div style='clear:both;'></div>";
+}
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('blvd', array('action' => $action, 'id'=>$id)));
+$form->prepare();
+
+echo "<div style='float:left;border:0px solid black;width:55%'>";
+echo $this->form()->openTag($form);// . "<br>";
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('name'));
+echo $this->formRow($form->get('display_name')) . "<br>";
+echo $this->formRow($form->get('address')) . "<br>";
+echo $this->formRow($form->get('website')) . "<br>";
+echo $this->formRow($form->get('phone')) . "<br>";
+echo $this->formRow($form->get('description')) . "<br>";
+echo $this->formRow($form->get('exclude_from_blvd')) . "<br>";
+echo $this->formRow($form->get('facebook')) . "<br>";
+//echo "<b>Retrieve Facebook</b>";
+echo $this->formRow($form->get('facebook_retrieve')) . "<br>";
+echo $this->formRow($form->get('twitter_username')) . "<br>";
+//echo $this->formRow($form->get('youtube')) . "<br>";
+//echo $this->formRow($form->get('pinterest')) . "<br>";
+echo $this->formRow($form->get('yelp')) . "<br>";
+//echo $this->formRow($form->get('googleplus')) . "<br>";
+//echo $this->formRow($form->get('foursquare')) . "<br>";
+//echo $this->formRow($form->get('tumblr')) . "<br>";
+echo $this->formRow($form->get('instagram_username')) . "<br>";
+echo $this->formRow($form->get('instagram_disabled')) . "<br>";
+echo $this->formRow($form->get('reservation_url')) . "<br>";
+echo $this->formRow($form->get('order_online')) . "<br>";
+//echo "<b>Primary Social</b><br>";
+
+echo $this->formInput($form->get('submit')) . "<br>";
+echo $this->form()->closeTag($form) . "<br>";
+echo "<div style='clear:both;'></div>";
+echo "</div>";

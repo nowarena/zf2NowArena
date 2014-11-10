@@ -1,0 +1,105 @@
+<?php
+
+echo $this->Subnav($this);
+//echo $this->flashMessenger()->render();
+
+echo "<table cellpadding='4' cellspacing='0'><tr><td>";
+echo "<form style='float:left;' action = '/cam/getperf'>";
+echo "<input type='text' name='performerid' style='width:120px;margin-bottom:-2px;margin-right:2px;'>";
+echo "<input type='submit' value='Search'>";
+echo "</form>";
+echo "</td><td>";
+echo " | <a href='" . $this->url("cam", array("action" => "getapponlinenow")). "' ";
+if ($where == "app") {
+    echo " style='font-weight:bold;'";
+}
+echo ">";
+echo "Approved Online Now(ish)";
+echo "</a> ";
+echo " | <a href='" . $this->url("cam", array("action" => "getdisapponlinenow")) . "' ";
+if ($where == "disapp") {
+    echo " style='font-weight:bold;'";
+}
+echo ">Disapproved Online Now(ish)</a> ";
+echo " | <a href='/cam' ";
+if ($where == "unapp") {
+    echo " style='font-weight:bold;'";
+}
+echo ">Unapproved</a> ";
+echo "</td><td>";
+echo " | Server time is now: " . date("Y-m-d H:i:s") . " | ";
+
+echo "</td>";
+
+if (isset($numPerPage)) {
+    echo "<td>";
+    echo "<form method='post'>";
+    echo " # per page: <select name='numPerPage' onchange='this.form.submit()'>";
+    for ($i = 1; $i <= 15; $i++) {
+        echo "<option ";
+        if ($numPerPage == $i) {
+            echo "selected";
+        }
+        echo ">$i</option>"; 
+    }
+    echo "</select>";
+    echo "</form>";
+    echo "</td>";
+}
+
+echo "</tr></table>";
+
+echo "<form name='app' method='post'>";
+
+echo "<center><input type='submit' value='Submit'>";
+echo "</center>";
+
+
+foreach($cam as $arr) : 
+
+	echo "<div style='float:left;border:1px solid black;margin:2px;'>";
+	$p_id = $arr['performerid'];
+	echo "<a 
+		target=_blank 
+		href='http://www.livejasmin.com/freechat.php?psid=bustyshots&pstour=t1&psprogram=REVS&performerid=$p_id&pstool=7_47261&gopage=bio'>";
+	echo "<img src='". $arr['image']. "'>";
+	echo "</a>";
+	echo "<br>";
+	echo "<div style='height:75px;float:left;width:100px;overflow:hidden;'>";
+	echo "<img src='". $arr['thumb']. "'>";
+	echo "</div>";
+	echo "<div style='padding:4px;float:left;'>";
+	echo $arr['lastSeen'] . " | ".date("M-d : H:i:s",$arr['unixtime_last']);
+	echo "<br>";
+	echo "<div style='float:left;'>Boobs:</div><input style='width:15px;margin-left:0px;float:left;' type='checkbox' name='boobsArr[]' value='$p_id'";
+	if ($arr['boobs']==1)echo " checked";	
+	echo "> ";
+	echo "<div style='float:left;'> &nbsp; | &nbsp; Ass:</div><input style='width:15px;margin-left:0px;float:left;' type='checkbox' name='assArr[]' value='$p_id'";
+	if ($arr['ass']==1)echo " checked";	
+	echo "> ";
+	
+	echo "<div style='float:left;'> &nbsp; | &nbsp; Best:</div><input style='width:15px;margin-left:0px;float:left;' type='checkbox' name='bestArr[]' value='$p_id'";
+	if ($arr['best'] == 1)echo " checked";	
+	echo "> ";
+	
+	echo "<input type='hidden' name='idArr[]' value='$p_id'>";
+	echo "<div style='clear:both;'></div>";
+	echo $p_id;
+	echo " &#183; ";
+	if ($arr['status']=='disapp'){
+		echo "<span style='color:red;'>";
+	}elseif ($arr['status']=='unapp'){
+		echo "<span style='color:grey;'>";
+	}else{
+		echo "<span>";
+	}
+	echo $arr['status'];
+	echo "</span>";
+	echo "</div>";
+	echo "</div>";
+
+endforeach; 
+
+echo "<div style='clear:both;'></div>";
+echo "<center><input type='submit' value='Submit'></center>";
+echo "</form><br><div style='clear:both;'></div>";

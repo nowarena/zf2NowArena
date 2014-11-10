@@ -1,0 +1,23 @@
+<?php
+$this->headTitle(ucfirst($action));
+
+echo $this->flashMessenger()->render();
+$this->Subnav($this);
+
+$this->mngcategory($form, $action, $id);
+
+/*
+$form = $this->form;
+$form->setAttribute('action', $this->url('blvd', array('site' => $this->getSite(), 'action' => $action, 'id'=>$id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);// . "<br>";
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('category')) . "<br>";
+echo $this->formRow($form->get('top'));// . "<br>";
+echo $this->formRow($form->get('bottom'));// . "<br>";
+echo $this->formRow($form->get('disabled')) . "<br>";
+echo "<br>";
+echo $this->formInput($form->get('submit'));// . "<br>";
+echo $this->form()->closeTag($form) . "<br>";
+*/

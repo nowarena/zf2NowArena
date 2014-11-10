@@ -1,0 +1,57 @@
+<style>
+#create_links_form > fieldset > fieldset > fieldset > legend
+{
+    float:left;
+    width:auto;
+}
+#create_links_form > fieldset > fieldset > fieldset > label{
+    float:left;
+    width:auto;
+    clear:none;
+    font-weight:normal;
+}
+#create_links_form > fieldset > fieldset > fieldset > legend {
+    font-weight:bold;
+    width:120px;
+}
+#create_links_form > fieldset > fieldset {
+    border-bottom:1px solid #cccccc;
+    margin-bottom:20px;
+}
+</style>
+<?php
+
+$this->Subnav($this);
+
+echo $this->flashMessenger()->render();
+
+
+$form = $this->formadd;
+$form->setAttribute('action', $this->url('links', array('action' => 'addlinks')));
+$form->prepare();
+
+echo "<span class='sectionTitle'>Add a link</span><br><br>";
+echo $this->form()->openTag($form);// . "<br>";
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('linkname')) . "<br>";
+echo $this->formRow($form->get('link')) . "<br>";
+echo $this->formInput($form->get('submit')) . "<br>";
+echo $this->form()->closeTag($form) . "<br>";
+echo "<Hr>";
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('links', array('action' => 'index')))->prepare();
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+$link = $form->get('links');
+
+echo $this->formCollection($link->get('links'));
+
+echo "<div style='clear:both;'></div>";
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+

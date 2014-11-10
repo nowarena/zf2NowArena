@@ -1,0 +1,48 @@
+<?php
+
+$this->headTitle("Edit Twitter User");
+
+echo $this->flashMessenger()->render();
+$this->Subnav();
+
+echo "<table border=0><tr><td valign='top'>";
+echo "<table cellpadding=4 cellspacing=0 border=1>";
+foreach($list as $key => $obj) {
+    echo "<tr><td>";
+    echo "<a target='_blank' href='https://twitter.com/" . $obj->getScreenName() . "'>"; 
+    echo $obj->getScreenName();
+    echo "</a>";
+    echo "</td>";
+    
+    echo "<td>";
+    echo $obj->getName();    
+    echo "</td>";
+    
+    echo "<td>";
+    echo $obj->getFoodtruck() ? "FT" : "";    
+    echo "</td>";
+    
+    echo "<td>";
+    echo "<a href='";
+    echo $this->url('twitter', array('action' => 'edituser', 'screenname' => $obj->getScreenName(), 'site' => SITE));
+    echo "'>Edit Twitter Info</a>";       
+    echo "</td>";
+    //
+    echo "<td>";
+    echo "<a href='" . $this->url('twitter', array('action' => 'addtoblvd', 'screenname' => $obj->getScreenName(), 'site' => SITE)) . "'>Add to Blvd</a>";       
+    echo "</td>";
+
+    echo "<td>";
+    echo "<a onclick='return confirm(\"Are you sure?\");' href='";
+    echo $this->url('twitter', array('action' => 'delete', 'screenname' => $obj->getScreenName(), 'site' => SITE));
+    echo "'>Delete Twitter User and Tweets</a>";       
+    echo "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+?>
+
+</td><td valign='top'>
+
+
+</td></tr><table>

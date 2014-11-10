@@ -1,0 +1,84 @@
+<?php 
+use Utility\Model\Utility;
+
+$this->displayCategories($categoryTopArr, true);
+
+$rowCount = 0;
+foreach($blvdUsersEnt as $key => $ent) {
+        
+    //display category header 
+    $catId = $ent->getCategoryId();
+    $catName = $categoryTopArr[$catId]['category'];
+    $catUrl = preg_replace("~[^a-z0-9]~is", "", $catName);
+    echo "<div class='bizContainer'>";
+    echo "<div class='browseCatLinks'>";
+    
+    echo "<a id='nextBizLink_" . $catId . "' class='nextBizLink' href='javascript:void(0);' ";
+    echo "data-category_id = '$catId' ";
+    echo "data-offset = '0' data-blvdid='" . $ent->getId() . "'><span class='prevNextArrow'>&raquo;</span></a>";
+    
+    echo "<div class='catSortName'>";
+
+    echo "<a href='";
+    echo $this->url("social", array("action" => "index", "category_id" => $ent->getCategoryId(), "category" =>$catUrl));
+    echo "'>";
+    echo  strtolower($catName);
+    echo "</a>";
+    // strtolower($catName);
+    echo "</div>";
+    
+    echo "<a id='prevBizLink_" . $catId . "' class='prevBizLink' href='javascript:void(0);' ";
+    echo "data-category_id = '$catId' data-offset = '0' data-blvdid='" . $ent->getId() . "'><span class='prevNextArrow'>&laquo;</span></a>";
+    
+    echo "</div>";
+    echo "<div class='categoryHeader'>";
+    echo "<span class='sectionTitle'>" . $catName . "</span> ";
+    echo "</div>";
+
+    echo "<div class=";
+    if ($rowCount + 1 == count($blvdUsersEnt)){//->count()) {
+        echo 'rowContainerLast';
+    } else {
+        echo 'rowContainer';
+    }
+    echo " id='category_$catId'>";
+    $this->container($ent, $ent->getSocialMedia());
+	echo "<div style='clear:both;'></div>";
+	echo "</div>";
+	
+    $catUrl = str_replace("/", "-", $catName);
+    echo "<div class='footer'>";
+    echo "<a href='";
+    echo $this->url("social", array("action" => "index", "category_id" => $ent->getCategoryId(), "category" =>$catUrl));
+    echo "'>";
+    echo  "All " . $catName . "&raquo;</a>";
+    echo "</div>";
+    
+    echo "<div style='clear:both;'></div>";
+    echo "</div>";//close bizContainer
+
+	$rowCount++;
+	
+	if ($rowCount == 1) {
+	   if ($isMobile) {
+	       echo "<div class='ad300x100'>";
+	       $this->adGlobal('300x100'); 
+	       echo "</div>";
+	   } else { 
+    	   echo "<div class='ad728x90'>";
+	       $this->adGlobal('728x90');    
+    	   echo "</div>";
+	   }
+	}
+	
+}
+
+echo "<div style='clear:both;'></div><br>";
+
+$this->displayCategories($categoryBottomArr);
+
+echo "<div style='clear:both;'></div><br>";
+
+$this->displayLinks($linkArr);
+
+echo $this->partial("partial/confirmdiv.phtml");
